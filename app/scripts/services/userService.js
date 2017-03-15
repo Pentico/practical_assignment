@@ -6,17 +6,37 @@
 angular.module('practicalAssignmentApp')
 .service('userService',['$http', function($http) {
 
-    var urlBase_user = '';
+    var urlBase_login = 'http://userservice.staging.tangentmicroservices.com/api-token-auth/';
+    var urlBaseProject = 'http://projectservice.staging.tangentmicroservices.com/api/v1/projects/';
+
     var Token = '';
     var username = '';
     var password = '';
+    var response ='';
 
     return {
+        
+        /**
+         * params :
+         *    username, password credentials of user
+         * returns token
+         */ 
+        postLogin : function(username, password) {
 
+           response =  $http.post(urlBase_login);
+        
+        },
+
+        /**
+         * Return Token 
+         */ 
         getToken : function(){
             return Token;
         },
 
+        /**
+         * Verify that user has token 
+         */ 
         validateToken : function() {
             if(Token != ''){
                 return true;
@@ -29,14 +49,14 @@ angular.module('practicalAssignmentApp')
          * return a list of all the users projects
          */
         getProjects : function(){
-
+            return $http.get(urlBaseProject);
         },
 
         /**
          * Adds a new Project 
          */
         putProject : function(project) {
-
+            response = $http.put(urlBaseProject + '/' + project + '/');
         },
         
 
@@ -46,6 +66,7 @@ angular.module('practicalAssignmentApp')
          */
         deleteProject : function(key) {
 
+            response = $http.delete(urlBaseProject + '/' + key + '/')
         },
 
         /**
@@ -54,6 +75,7 @@ angular.module('practicalAssignmentApp')
          */ 
         getProject : function(key) {
 
+            response = $http.get(urlBaseProject + '/' + key + '/')
         },
 
         /**
