@@ -6,13 +6,12 @@
 angular.module('practicalAssignmentApp')
 .service('userService',['$http', function($http) {
 
-    var urlBase_login = 'http://userservice.staging.tangentmicroservices.com/api-token-auth/';
+    var urlBaselogin = 'http://userservice.staging.tangentmicroservices.com/api-token-auth/';
     var urlBaseProject = 'http://projectservice.staging.tangentmicroservices.com/api/v1/projects/';
 
     var Token = '';
-    var username = '';
-    var password = '';
     var response ='';
+    var HTTP='';
 
     return {
         
@@ -23,7 +22,27 @@ angular.module('practicalAssignmentApp')
          */ 
         postLogin : function(username, password) {
 
-           response =  $http.post(urlBase_login);
+            var req = {
+                method  : 'post',
+                url     : urlBaselogin,
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+
+                data: {
+                    username    : username,
+                    password    : password
+                }
+            };
+
+           response =  $http.post(req);
+
+           if(response.token) {
+                HTTP = $http;
+                HTTP.defaults.headers.common.Authorization = 'token ' + response.token;
+           }else {
+               throw new Error('Token was not returned');
+           }
         
         },
 
@@ -38,7 +57,7 @@ angular.module('practicalAssignmentApp')
          * Verify that user has token 
          */ 
         validateToken : function() {
-            if(Token != ''){
+            if(Token !== ''){
                 return true;
             }else {
                 return false;
@@ -66,7 +85,7 @@ angular.module('practicalAssignmentApp')
          */
         deleteProject : function(key) {
 
-            response = $http.delete(urlBaseProject + '/' + key + '/')
+            response = $http.delete(urlBaseProject + '/' + key + '/');
         },
 
         /**
@@ -75,7 +94,7 @@ angular.module('practicalAssignmentApp')
          */ 
         getProject : function(key) {
 
-            response = $http.get(urlBaseProject + '/' + key + '/')
+            response = $http.get(urlBaseProject + '/' + key + '/');
         },
 
         /**
@@ -83,7 +102,7 @@ angular.module('practicalAssignmentApp')
          * param : pk of the project
          */ 
         getTask : function(key) {
-
+            response = key; // dummy 
         },
 
         /**
@@ -91,7 +110,7 @@ angular.module('practicalAssignmentApp')
          * param : pk of the project
          */ 
         deleteTask : function(key) {
-
+            response = key; // dummy 
         },
 
         /**
@@ -99,7 +118,7 @@ angular.module('practicalAssignmentApp')
          * param : task of the project
          */
         putTask : function(task) {
-
+            response = task; // dummy 
         }
     };
 }]);
