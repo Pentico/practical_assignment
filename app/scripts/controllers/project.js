@@ -1,6 +1,6 @@
 'use strict';
 
 angular.module('practicalAssignmentApp')
-    .controller('projectController',function(projectService, $scope){
+    .controller('projectController',function(userService, $scope){
         
 });
