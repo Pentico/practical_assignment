@@ -20,17 +20,17 @@ angular
   .config(function ($routeProvider, $locationProvider) {
     $routeProvider
       .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl',
-        controllerAs: 'main'
+        templateUrl: 'views/user.html',
+        controller: 'userController',
+        controllerAs: 'user'
       })
-      .when('/about', {
-        templateUrl: 'views/about.html',
-        controller: 'AboutCtrl',
-        controllerAs: 'about'
+      .when('/project', {
+        templateUrl: 'views/project.html',
+        controller: 'projectController',
+        controllerAs: 'project'
       })
       .otherwise({
-        redirectTo: '/about'
+        redirectTo: '/'
       });
 
        $locationProvider.hashPrefix('');
