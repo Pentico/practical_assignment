@@ -13,7 +13,7 @@ angular.module('practicalAssignmentApp')
         userService.getProjects()
                 .then(function(response) {
                     $scope.projects = response.data;
-                    
+                    $scope.deleteProject();
                 }, function(error){
                     console.log('Error Trying to retrieve the information');
                 });    
@@ -32,7 +32,7 @@ angular.module('practicalAssignmentApp')
 
 
         /**
-         * 
+         * Add New Project
          */
       $scope.addProject = function(){
             userService.postProject(
@@ -50,6 +50,11 @@ angular.module('practicalAssignmentApp')
 
         $scope.deleteProject = function() {
 
+            userService.deleteProject(78).then(function(response){
+                console.log(response);
+            }, function(error){
+                console.log("Error deleting new Project");
+            });
         }; // EOF
 
         $scope.editProject = function() {
