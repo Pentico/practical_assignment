@@ -71,7 +71,6 @@ angular.module('practicalAssignmentApp')
          * return a list of all the users projects
          */
         this.getProjects = function(){
-            console.log(Token);
              return $http.get(
                  urlBaseProject,
                  {headers: {
@@ -85,6 +84,15 @@ angular.module('practicalAssignmentApp')
          * Adds a new Project 
          */
         this.putProject = function(project) {
+
+             return $http.put(
+                 urlBaseProject,
+                 project,
+                 {headers: {
+                    'Content-Type' : 'application/json',
+                    'Authorization' : 'Token '+ Token
+                }}
+                 );
             response = $http.put(urlBaseProject + '/' + project + '/');
         }; // EOF
         
@@ -95,7 +103,13 @@ angular.module('practicalAssignmentApp')
          */
         this.deleteProject = function(key) {
 
-            response = $http.delete(urlBaseProject + '/' + key + '/');
+            return $http.delete(
+                 urlBaseProject + key + '/',
+                 {headers: {
+                    'Content-Type' : 'application/json',
+                    'Authorization' : 'Token '+ Token
+                }}
+                 );
         }; // EOF
 
         /**
@@ -111,6 +125,23 @@ angular.module('practicalAssignmentApp')
                     'Authorization' : 'Token '+ Token
                 }}
                  );
+        }; // EOF
+
+
+        /***
+         * Update a Project 
+         */
+        this.editProject = function(project) {
+
+                return $http.patch(
+                urlBaseProject,
+                task,
+                 {headers: {
+                    'Content-Type' : 'application/json',
+                    'Authorization' : 'Token '+ Token
+                }
+            }
+            );
         }; // EOF
 
         /**
@@ -133,6 +164,14 @@ angular.module('practicalAssignmentApp')
          * param : pk of the project
          */ 
         this.deleteTask = function(key) {
+
+            return $http.delete(
+                urlBaseTask + key + '/',
+                 {headers: {
+                    'Content-Type' : 'application/json',
+                    'Authorization' : 'Token '+ Token
+                }}
+            );
             response = key; // dummy 
         }; // EOF
 
@@ -141,6 +180,32 @@ angular.module('practicalAssignmentApp')
          * param : task of the project
          */
         this.putTask = function(task) {
-            response = task; // dummy 
+           return $http.put(
+                urlBaseTask,
+                task,
+                 {headers: {
+                    'Content-Type' : 'application/json',
+                    'Authorization' : 'Token '+ Token
+                }
+            }
+            );
         }; // EOF
+
+        /**
+         * Update Task information
+         * param json string with all fields that require updating
+         */
+        this.editTask = function(task){
+
+            return $http.patch(
+                urlBaseTask,
+                task,
+                 {headers: {
+                    'Content-Type' : 'application/json',
+                    'Authorization' : 'Token '+ Token
+                }
+            }
+            );
+        }; // EOF
+
 }]);
