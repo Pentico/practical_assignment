@@ -28,6 +28,11 @@ angular
         templateUrl: 'views/project.html',
         controller: 'projectController',
         controllerAs: 'project'
+      }).
+      when('/itemDetails', {
+        templateUrl: '/views/itemDetails.html',
+        controller: 'itemDetailsController',
+        controllerAs: 'itemDetails'
       })
       .otherwise({
         redirectTo: '/'
