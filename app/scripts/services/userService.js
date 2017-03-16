@@ -63,9 +63,7 @@ angular.module('practicalAssignmentApp')
          * return a list of all the users projects
          */
         this.getProjects = function(){
-             HTTP.get(urlBaseProject);
-
-             console.log(urlBaseProject);
+             return HTTP.get(urlBaseProject);
         };
 
         /**
