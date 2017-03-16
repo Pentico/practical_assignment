@@ -53,12 +53,16 @@ angular.module('practicalAssignmentApp')
             userService.deleteProject(78).then(function(response){
                 console.log(response);
             }, function(error){
-                console.log("Error deleting new Project");
+                console.log("Error deleting  Project");
             });
         }; // EOF
 
         $scope.editProject = function() {
-
+            userService.editProject().then(function(response){
+                console.log(response);
+            }, function(error){
+                console.log("Error Editing  Project");
+            });
         }; // EOF
 
 }]);
