@@ -83,9 +83,9 @@ angular.module('practicalAssignmentApp')
         /**
          * Adds a new Project 
          */
-        this.putProject = function(project) {
+        this.postProject = function(project) {
 
-             return $http.put(
+             return $http.post(
                  urlBaseProject,
                  project,
                  {headers: {
