@@ -45,7 +45,7 @@ angular.module('practicalAssignmentApp')
         };
 
         this.setToken = function(value) {
-            this.Token = value;
+            Token = value;
         };
 
         /**
@@ -63,7 +63,14 @@ angular.module('practicalAssignmentApp')
          * return a list of all the users projects
          */
         this.getProjects = function(){
-             return HTTP.get(urlBaseProject);
+            console.log(Token);
+             return $http.get(
+                 urlBaseProject,
+                 {headers: {
+                    'Content-Type' : 'application/json',
+                    'Authorization' : 'Token '+ Token
+                }}
+                 );
         };
 
         /**
