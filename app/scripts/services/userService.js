@@ -12,15 +12,13 @@ angular.module('practicalAssignmentApp')
     var Token = '';
     var response ='hi';
     var HTTP='';
-
-    return {
         
         /**
          * params :
          *    username, password credentials of user
          * returns token
          */ 
-        postLogin : function(username, password) {
+        this.postLogin = function(username, password) {
 
             var req = {
                 method  : 'POST',
@@ -34,99 +32,90 @@ angular.module('practicalAssignmentApp')
                 }
             };
 
-           $http(req).then(function success(data){
-
-               
-               response = data;
-              
-
-                HTTP = $http;
-                HTTP.defaults.headers.common.Authorization = 'token ' + data.data.token; 
-
-               return data.data;
-           }, function failer(data) {
-               console.log('on Failer Couldnt connect to server' + data);
-           });
+           return $http(req);
 
 
         
-        },
+        };
 
         /**
          * Return Token 
          */ 
-        getToken : function(){
+        this.getToken = function(){
             return Token;
-        },
+        };
+
+        this.setToken = function(value) {
+            this.Token = value;
+        };
 
         /**
          * Verify that user has token 
          */ 
-        validateToken : function() {
+        this.validateToken = function() {
             if(Token !== ''){
                 return true;
             }else {
                 return false;
             }
-        },
+        };
 
         /**
          * return a list of all the users projects
          */
-        getProjects : function(){
+        this.getProjects = function(){
              HTTP.get(urlBaseProject);
 
              console.log(urlBaseProject);
-        },
+        };
 
         /**
          * Adds a new Project 
          */
-        putProject : function(project) {
+        this.putProject = function(project) {
             response = $http.put(urlBaseProject + '/' + project + '/');
-        },
+        };
         
 
         /**
          * deletes a project from server 
          * param : pk of the project
          */
-        deleteProject : function(key) {
+        this.deleteProject = function(key) {
 
             response = $http.delete(urlBaseProject + '/' + key + '/');
-        },
+        };
 
         /**
          * Get a Specific project using pk
          * param : pk of the project
          */ 
-        getProject : function(key) {
+        this.getProject = function(key) {
 
             response = $http.get(urlBaseProject + '/' + key + '/');
-        },
+        };
 
         /**
          * Get a Specific task using pk
          * param : pk of the project
          */ 
-        getTask : function(key) {
+        this.getTask = function(key) {
             response = key; // dummy 
-        },
+        };
 
         /**
          * deletes a Specific task using pk
          * param : pk of the project
          */ 
-        deleteTask : function(key) {
+        this.deleteTask = function(key) {
             response = key; // dummy 
-        },
+        };
 
         /**
          * Adds a task to project
          * param : task of the project
          */
-        putTask : function(task) {
+        this.putTask = function(task) {
             response = task; // dummy 
-        }
-    };
+        };
 }]);
