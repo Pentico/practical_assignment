@@ -1,0 +1,19 @@
+<div class="table-responsive">          
+  <table class="table table-sm table-invers">
+    <thead>
+      <tr>
+        <th>Task Name</th>
+        <th>Due Date</th>
+        <th>Es. Hours</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="item in project">
+        <td>{{item.title}}</td>
+        <td>{{item.due_date}}</td>
+        <td>{{item.estimated_hours}}</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+</div>

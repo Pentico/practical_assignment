@@ -34,10 +34,7 @@ angular.module('practicalAssignmentApp')
                 }
             };
 
-           return $http(req);
-
-
-        
+           return $http(req);        
         };
 
         /**
