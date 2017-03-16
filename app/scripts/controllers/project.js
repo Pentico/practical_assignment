@@ -2,5 +2,5 @@
 
 angular.module('practicalAssignmentApp')
     .controller('projectController',function(){
-        
+
 });

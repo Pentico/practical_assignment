@@ -10,7 +10,7 @@ angular.module('practicalAssignmentApp')
     var urlBaseProject = 'http://projectservice.staging.tangentmicroservices.com/api/v1/projects/';
 
     var Token = '';
-    var response ='';
+    var response ='hi';
     var HTTP='';
 
     return {
@@ -23,26 +23,32 @@ angular.module('practicalAssignmentApp')
         postLogin : function(username, password) {
 
             var req = {
-                method  : 'post',
+                method  : 'POST',
                 url     : urlBaselogin,
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type' : 'application/json'
                 },
-
                 data: {
                     username    : username,
                     password    : password
                 }
             };
 
-           response =  $http.post(req);
+           $http(req).then(function success(data){
 
-           if(response.token) {
+               
+               response = data;
+              
+
                 HTTP = $http;
-                HTTP.defaults.headers.common.Authorization = 'token ' + response.token;
-           }else {
-               throw new Error('Token was not returned');
-           }
+                HTTP.defaults.headers.common.Authorization = 'token ' + data.data.token; 
+
+               return data.data;
+           }, function failer(data) {
+               console.log('on Failer Couldnt connect to server' + data);
+           });
+
+
         
         },
 
@@ -68,7 +74,9 @@ angular.module('practicalAssignmentApp')
          * return a list of all the users projects
          */
         getProjects : function(){
-            return $http.get(urlBaseProject);
+             HTTP.get(urlBaseProject);
+
+             console.log(urlBaseProject);
         },
 
         /**

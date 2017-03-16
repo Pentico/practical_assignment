@@ -5,5 +5,6 @@
 
 angular.module('practicalAssignmentApp')
     .controller('userController',function(userService, $scope){
-        $scope.name = userService.test();
+         $scope.name = userService.postLogin('jacob.zuma','tangent');
+        
 });
