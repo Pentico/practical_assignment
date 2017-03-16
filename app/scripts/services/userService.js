@@ -19,7 +19,6 @@ angular.module('practicalAssignmentApp')
          * returns token
          */ 
         this.postLogin = function(username, password) {
-
             var req = {
                 method  : 'POST',
                 url     : urlBaselogin,
