@@ -20,6 +20,7 @@ angular.module('practicalAssignmentApp')
                 });    
         }
 
+        // TODO remove this
         getProjects();  // init
 
         $scope.viewDetails = function($index) {
