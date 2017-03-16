@@ -23,7 +23,7 @@ angular.module('practicalAssignmentApp')
         getProjects();  // init
 
         $scope.viewDetails = function($index) {
-
+            userService.setPkey($scope.projects[$index].pk);
             $location.path('/itemDetails');
         }
 

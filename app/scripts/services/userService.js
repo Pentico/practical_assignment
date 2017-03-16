@@ -8,10 +8,13 @@ angular.module('practicalAssignmentApp')
 
     var urlBaselogin = 'http://userservice.staging.tangentmicroservices.com/api-token-auth/';
     var urlBaseProject = 'http://projectservice.staging.tangentmicroservices.com/api/v1/projects/';
+    var urlBaseTask = 'http://projectservice.staging.tangentmicroservices.com/api/v1/task/';
 
+    /**
+     * This var are used in sharing information between controllers
+     */
     var Token = '';
-    var response ='hi';
-    var HTTP='';
+    var Pkey = '';
         
         /**
          * params :
@@ -42,11 +45,19 @@ angular.module('practicalAssignmentApp')
          */ 
         this.getToken = function(){
             return Token;
-        };
+        }; // EOF
 
         this.setToken = function(value) {
             Token = value;
+        };// EOF
+
+        this.setPkey = function(value){
+            Pkey = value;
         };
+
+        this.getPkey = function() {
+            return Pkey;
+        };// EOF
 
         /**
          * Verify that user has token 
@@ -57,7 +68,7 @@ angular.module('practicalAssignmentApp')
             }else {
                 return false;
             }
-        };
+        }; // EOF
 
         /**
          * return a list of all the users projects
@@ -71,14 +82,14 @@ angular.module('practicalAssignmentApp')
                     'Authorization' : 'Token '+ Token
                 }}
                  );
-        };
+        }; // EOF
 
         /**
          * Adds a new Project 
          */
         this.putProject = function(project) {
             response = $http.put(urlBaseProject + '/' + project + '/');
-        };
+        }; // EOF
         
 
         /**
@@ -88,7 +99,7 @@ angular.module('practicalAssignmentApp')
         this.deleteProject = function(key) {
 
             response = $http.delete(urlBaseProject + '/' + key + '/');
-        };
+        }; // EOF
 
         /**
          * Get a Specific project using pk
@@ -96,16 +107,29 @@ angular.module('practicalAssignmentApp')
          */ 
         this.getProject = function(key) {
 
-            response = $http.get(urlBaseProject + '/' + key + '/');
-        };
+         return    $http.get(
+                 urlBaseProject + key + '/',
+                 {headers: {
+                    'Content-Type' : 'application/json',
+                    'Authorization' : 'Token '+ Token
+                }}
+                 );
+        }; // EOF
 
         /**
          * Get a Specific task using pk
          * param : pk of the project
          */ 
         this.getTask = function(key) {
-            response = key; // dummy 
-        };
+
+            return    $http.get(
+                 urlBaseProject + key + '/',
+                 {headers: {
+                    'Content-Type' : 'application/json',
+                    'Authorization' : 'Token '+ Token
+                }}
+                 );
+        }; // EOF
 
         /**
          * deletes a Specific task using pk
@@ -113,7 +137,7 @@ angular.module('practicalAssignmentApp')
          */ 
         this.deleteTask = function(key) {
             response = key; // dummy 
-        };
+        }; // EOF
 
         /**
          * Adds a task to project
@@ -121,5 +145,5 @@ angular.module('practicalAssignmentApp')
          */
         this.putTask = function(task) {
             response = task; // dummy 
-        };
+        }; // EOF
 }]);
