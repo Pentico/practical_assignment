@@ -120,7 +120,7 @@ angular.module('practicalAssignmentApp')
         this.getTask = function(key) {
 
             return    $http.get(
-                 urlBaseProject + key + '/',
+                 urlBaseTask + key + '/',
                  {headers: {
                     'Content-Type' : 'application/json',
                     'Authorization' : 'Token '+ Token

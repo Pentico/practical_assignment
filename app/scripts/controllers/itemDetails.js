@@ -8,13 +8,13 @@ angular.module('practicalAssignmentApp')
 
 
         /***
-         * Gets Specific Project 
+         * Gets all user tasks 
          * var project ends with the info from call
          * 
          * TODO : Need to debug this 
          *      part... Currently they are no task in any project of JZ 
          */
-        userService.getProject(pKey)
+        userService.getTask(pKey)
             .then(function(response){
                 console.log(response);
                 $scope.project =response;
