@@ -9,8 +9,8 @@ angular.module('practicalAssignmentApp')
          $scope.end_title;
          $scope.start_date;
          $scope.end_date;
-         $scope.is_billable;
-         $scope.is_active;
+         $scope.is_billable= true;
+         $scope.is_active = true;
 
         /**
          * Getting all the users projects
