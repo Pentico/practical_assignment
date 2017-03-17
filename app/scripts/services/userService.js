@@ -145,17 +145,31 @@ angular.module('practicalAssignmentApp')
         /***
          * Update a Project 
          */
-        this.editProject = function(project) {
+        this.editProject = function(project, pKey) {
 
-                return $http.patch(
-                urlBaseProject,
-                task,
-                 {headers: {
-                    'Content-Type' : 'application/json',
-                    'Authorization' : 'Token '+ Token
-                }
+            if(project.end_date == null){
+                delete project.end_date;
+            }else{
+
+               var temp = project.end_date;
+                project.end_date = temp.getFullYear() + '-' + (temp.getMonth()+1) + '-' + temp.getDate();
             }
-            );
+
+            return  $http({
+                        method: 'Patch',
+                        url: urlBaseProject + pKey + '/',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                            'Authorization' : 'Token '+ Token
+                    },
+                        transformRequest: function(obj) {
+                            var str = [];
+                            for(var p in obj)
+                            str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                            return str.join("&");
+                        },
+                        data: project
+                })
         }; // EOF
 
         /**

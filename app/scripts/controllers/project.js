@@ -122,7 +122,17 @@ angular.module('practicalAssignmentApp')
          */
         $scope.editProject = function() {
             console.log($scope.start_date);
-            userService.editProject().then(function(response){
+            userService.editProject(
+                {
+                    title       : $scope.title,
+                    description : $scope.description,
+                    start_date  : $scope.start_date.getFullYear() + '-' + ($scope.start_date.getMonth()+1) + '-' + $scope.start_date.getDate(),
+                    end_date    :  $scope.end_date,
+                    is_billable :  $scope.is_billable ,
+                    is_active   :  $scope.is_active 
+
+                },$scope.projects[$scope.index].pk
+            ).then(function(response){
                 console.log(response);
             }, function(error){
                 console.log("Error Editing  Project");
