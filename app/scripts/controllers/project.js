@@ -34,9 +34,9 @@ angular.module('practicalAssignmentApp')
         // TODO remove this
         getProjects();  // init
 
-        $scope.viewDetails = function($index) {
+        $scope.viewDetails = function() {
 
-            userService.setPkey($scope.projects[$index].pk);
+            userService.setPkey($scope.projects[$scope.index].pk);
             $location.path('/itemDetails');
         };
 
@@ -49,7 +49,7 @@ angular.module('practicalAssignmentApp')
                 {
                     title       : $scope.title,
                     description : $scope.description,
-                    start_date  : $scope.start_date,
+                    start_date  : new Date($scope.start_date),
                     end_date    : $scope.end_date,
                     is_billable : $scope.is_billable,
                     is_active   : $scope.is_active
@@ -81,14 +81,16 @@ angular.module('practicalAssignmentApp')
          * if the user decided to click editproject or deleteProject
          * 
          */
-        $scope.clickedOnItem = function() {
-            
+        $scope.clickedOnItem = function($index) {
+
+            $scope.disable_ViewProject = false;
+            $scope.disable_delProject = false;
             $scope.projects[$index];
             $scope.index = $index
             $scope.title = $scope.projects[$index].title;
             $scope.description = $scope.projects[$index].description;
-            $scope.start_date = $scope.projects[$index].start_date;
-            $scope.end_date = $scope.projects[$index].end_date;
+            $scope.start_date = new Date($scope.projects[$index].start_date);  
+            $scope.end_date = new Date($scope.projects[$index].end_date);
             $scope.is_billable = $scope.projects[$index].is_billable;
             $scope.is_active = $scope.projects[$index].is_active;
 
@@ -113,14 +115,19 @@ angular.module('practicalAssignmentApp')
 
 
         /***
-         * Edit a Project
+         * Edit a Project 
          */
         $scope.editProject = function() {
+            console.log($scope.start_date);
             userService.editProject().then(function(response){
                 console.log(response);
             }, function(error){
                 console.log("Error Editing  Project");
             });
         }; // EOF
+
+
+
+
 
 }]);
