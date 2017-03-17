@@ -4,6 +4,13 @@ angular.module('practicalAssignmentApp')
     .controller('projectController',['$scope', 'userService','$location', function($scope, userService, $location){
 
          $scope.projects = [];
+         $scope.title;
+         $scope.description;
+         $scope.end_title;
+         $scope.start_date;
+         $scope.end_date;
+         $scope.is_billable;
+         $scope.is_active;
 
         /**
          * Getting all the users projects
@@ -13,7 +20,6 @@ angular.module('practicalAssignmentApp')
         userService.getProjects()
                 .then(function(response) {
                     $scope.projects = response.data;
-                    $scope.deleteProject();
                 }, function(error){
                     console.log('Error Trying to retrieve the information');
                 });    
@@ -35,11 +41,16 @@ angular.module('practicalAssignmentApp')
          * Add New Project
          */
       $scope.addProject = function(){
+
             userService.postProject(
                 {
-                    title   : 'working',
-                    description : 'The One ',
-                    start_date : '1991-08-13'
+                    title       : $scope.title,
+                    description : $scope.description,
+                    start_date  : $scope.start_date,
+                    end_date    : $scope.end_date,
+                    is_billable : $scope.is_billable,
+                    is_active   : $scope.is_active
+
                 }
             ).then(function(response){
                 console.log(response);
@@ -64,5 +75,9 @@ angular.module('practicalAssignmentApp')
                 console.log("Error Editing  Project");
             });
         }; // EOF
+
+        $scope.myFunction() {
+            
+        }; //EOF
 
 }]);
