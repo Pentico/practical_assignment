@@ -3,6 +3,7 @@
 angular.module('practicalAssignmentApp')
     .controller('projectController',['$scope', 'userService','$location', function($scope, userService, $location){
 
+
          $scope.projects = [];
          $scope.title;
          $scope.description;
@@ -11,6 +12,10 @@ angular.module('practicalAssignmentApp')
          $scope.end_date;
          $scope.is_billable= true;
          $scope.is_active = true;
+         $scope.disable_editProject = true;
+         $scope.disable_delProject = true;
+         $scope.disable_ViewProject = true;
+         $scope.index;
 
         /**
          * Getting all the users projects
@@ -35,8 +40,6 @@ angular.module('practicalAssignmentApp')
             $location.path('/itemDetails');
         };
 
-
-
         /**
          * Add New Project
          */
@@ -59,15 +62,42 @@ angular.module('practicalAssignmentApp')
             });
         }; // EOF
 
+
+        /**
+         * Deleted a Project using the pkey,
+         *  the user must have cliked on the project first
+         */
         $scope.deleteProject = function() {
 
-            userService.deleteProject(78).then(function(response){
+            userService.deleteProject($index).then(function(response){
                 console.log(response);
             }, function(error){
                 console.log("Error deleting  Project");
             });
         }; // EOF
 
+        /**
+         * Most update the project variable 
+         * if the user decided to click editproject or deleteProject
+         * 
+         */
+        $scope.clickedOnItem = function() {
+            
+            $scope.projects[$index];
+            $scope.index = $index
+            $scope.title = $scope.projects[$index].title;
+            $scope.description = $scope.projects[$index].description;
+            $scope.start_date = $scope.projects[$index].start_date;
+            $scope.end_date = $scope.projects[$index].end_date;
+            $scope.is_billable = $scope.projects[$index].is_billable;
+            $scope.is_active = $scope.projects[$index].is_active;
+
+        }; // EOF
+
+
+        /***
+         * Edit a Project
+         */
         $scope.editProject = function() {
             userService.editProject().then(function(response){
                 console.log(response);
@@ -75,9 +105,5 @@ angular.module('practicalAssignmentApp')
                 console.log("Error Editing  Project");
             });
         }; // EOF
-
-        $scope.myFunction() {
-            
-        }; //EOF
 
 }]);
