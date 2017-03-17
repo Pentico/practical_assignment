@@ -21,10 +21,18 @@ angular.module('practicalAssignmentApp')
          * Getting all the users projects
          */
         var getProjects = function (){
-    
+
         userService.getProjects()
                 .then(function(response) {
                     $scope.projects = response.data;
+
+            userService.postProject().then(function(response){
+                console.log('ksdfj');
+                console.log(response);
+            }, function(error){
+                console.log("Error Adding new Project");
+            });
+
                 }, function(error){
                     console.log('Error Trying to retrieve the information');
                 });    
@@ -44,18 +52,8 @@ angular.module('practicalAssignmentApp')
          * Add New Project
          */
       $scope.addProject = function(){
-
-            userService.postProject(
-                {
-                    title       : $scope.title,
-                    description : $scope.description,
-                    start_date  : new Date($scope.start_date),
-                    end_date    : $scope.end_date,
-                    is_billable : $scope.is_billable,
-                    is_active   : $scope.is_active
-
-                }
-            ).then(function(response){
+            userService.postProject().then(function(response){
+                console.log('ksdfj');
                 console.log(response);
             }, function(error){
                 console.log("Error Adding new Project");
@@ -69,7 +67,8 @@ angular.module('practicalAssignmentApp')
          */
         $scope.deleteProject = function() {
 
-            userService.deleteProject($index).then(function(response){
+            userService.deleteProject($scope.projects[$scope.index].pk).then(function(response){
+                console.log("In delete");
                 console.log(response);
             }, function(error){
                 console.log("Error deleting  Project");
@@ -85,6 +84,7 @@ angular.module('practicalAssignmentApp')
 
             $scope.disable_ViewProject = false;
             $scope.disable_delProject = false;
+
             $scope.projects[$index];
             $scope.index = $index
             $scope.title = $scope.projects[$index].title;

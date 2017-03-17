@@ -83,17 +83,26 @@ angular.module('practicalAssignmentApp')
         /**
          * Adds a new Project 
          */
-        this.postProject = function(project) {
-
-             return $http.post(
-                 urlBaseProject,
-                 project,
-                 {headers: {
-                    'Content-Type' : 'application/json',
+        this.postProject = function() {
+             return $http({
+                method: 'POST',
+                url: urlBaseProject,
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
                     'Authorization' : 'Token '+ Token
-                }}
-                 );
-            response = $http.put(urlBaseProject + '/' + project + '/');
+            },
+                transformRequest: function(obj) {
+                    var str = [];
+                    for(var p in obj)
+                    str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                    return str.join("&");
+                },
+                data: {
+                    title: 'llll', 
+                    description: 'come on',
+                     start_date : '1991-8-13'
+                    }
+            })
         }; // EOF
         
 
