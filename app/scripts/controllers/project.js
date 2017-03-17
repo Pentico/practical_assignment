@@ -95,6 +95,23 @@ angular.module('practicalAssignmentApp')
         }; // EOF
 
 
+        /**
+         * Clearing the variable so the initial 
+         * values are not displayed when you want to add a new project.
+         */
+        $scope.cleanVar = function() {
+
+            $scope.index = null;
+            $scope.title = null;
+            $scope.description = null;
+            $scope.start_date = null;
+            $scope.end_date = null;
+            $scope.is_active = null;
+            $scope.is_billable = null;
+
+        }; // EOF
+
+
         /***
          * Edit a Project
          */
