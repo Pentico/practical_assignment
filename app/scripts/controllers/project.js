@@ -21,18 +21,10 @@ angular.module('practicalAssignmentApp')
          * Getting all the users projects
          */
         var getProjects = function (){
-
+    
         userService.getProjects()
                 .then(function(response) {
                     $scope.projects = response.data;
-
-            userService.postProject().then(function(response){
-                console.log('ksdfj');
-                console.log(response);
-            }, function(error){
-                console.log("Error Adding new Project");
-            });
-
                 }, function(error){
                     console.log('Error Trying to retrieve the information');
                 });    
@@ -52,8 +44,19 @@ angular.module('practicalAssignmentApp')
          * Add New Project
          */
       $scope.addProject = function(){
-            userService.postProject().then(function(response){
-                console.log('ksdfj');
+          console.log($scope.start_date.getDay());
+          console.log(new Date($scope.start_date).get);
+            userService.postProject(
+                {
+                    title       : $scope.title,
+                    description : $scope.description,
+                    start_date  : $scope.start_date.getFullYear() + '-' + ($scope.start_date.getMonth()+1) + '-' + $scope.start_date.getDate(),
+                    end_date    :  $scope.end_date,
+                    is_billable :  $scope.is_billable ,
+                    is_active   :  $scope.is_active 
+
+                }
+            ).then(function(response){
                 console.log(response);
             }, function(error){
                 console.log("Error Adding new Project");
@@ -107,9 +110,9 @@ angular.module('practicalAssignmentApp')
             $scope.title = null;
             $scope.description = null;
             $scope.start_date = null;
-            $scope.end_date = null;
-            $scope.is_active = null;
-            $scope.is_billable = null;
+            $scope.end_date = '';
+            $scope.is_active = true;
+            $scope.is_billable = true;
 
         }; // EOF
 

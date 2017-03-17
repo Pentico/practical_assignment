@@ -83,7 +83,16 @@ angular.module('practicalAssignmentApp')
         /**
          * Adds a new Project 
          */
-        this.postProject = function() {
+        this.postProject = function(project) {
+
+            if(project.end_date == null){
+                delete project.end_date;
+            }else{
+
+               var temp = project.end_date;
+                project.end_date = temp.getFullYear() + '-' + (temp.getMonth()+1) + '-' + temp.getDate();
+            }
+
              return $http({
                 method: 'POST',
                 url: urlBaseProject,
@@ -97,11 +106,7 @@ angular.module('practicalAssignmentApp')
                     str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
                     return str.join("&");
                 },
-                data: {
-                    title: 'llll', 
-                    description: 'come on',
-                     start_date : '1991-8-13'
-                    }
+                data: project
             })
         }; // EOF
         
