@@ -207,33 +207,61 @@ angular.module('practicalAssignmentApp')
          * Adds a task to project
          * param : task of the project
          */
-        this.putTask = function(task) {
-           return $http.put(
-                urlBaseTask,
-                task,
-                 {headers: {
-                    'Content-Type' : 'application/json',
-                    'Authorization' : 'Token '+ Token
-                }
+        this.putTask = function(task, pKey) {
+
+            if(project.due_date == null){
+                delete project.due_date;
+            }else{
+
+               var temp = project.due_date;
+                project.due_date = temp.getFullYear() + '-' + (temp.getMonth()+1) + '-' + temp.getDate();
             }
-            );
+           return $http({
+                        method: 'PUT',
+                        url: urlBaseTask + pKey + '/',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                            'Authorization' : 'Token '+ Token
+                    },
+                        transformRequest: function(obj) {
+                            var str = [];
+                            for(var p in obj)
+                            str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                            return str.join("&");
+                        },
+                        data: project
+                })
         }; // EOF
 
         /**
          * Update Task information
          * param json string with all fields that require updating
          */
-        this.editTask = function(task){
+        this.editTask = function(task, pKey){
 
-            return $http.patch(
-                urlBaseTask,
-                task,
-                 {headers: {
-                    'Content-Type' : 'application/json',
-                    'Authorization' : 'Token '+ Token
-                }
+              if(project.due_date == null){
+                delete project.due_date;
+            }else{
+
+               var temp = project.due_date;
+                project.due_date = temp.getFullYear() + '-' + (temp.getMonth()+1) + '-' + temp.getDate();
             }
-            );
+
+            return  $http({
+                        method: 'Patch',
+                        url: urlBaseTask + pKey + '/',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                            'Authorization' : 'Token '+ Token
+                    },
+                        transformRequest: function(obj) {
+                            var str = [];
+                            for(var p in obj)
+                            str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                            return str.join("&");
+                        },
+                        data: project
+                })
         }; // EOF
 
 }]);
