@@ -8,7 +8,7 @@ angular.module('practicalAssignmentApp')
 
     var urlBaselogin = 'http://userservice.staging.tangentmicroservices.com/api-token-auth/';
     var urlBaseProject = 'http://projectservice.staging.tangentmicroservices.com/api/v1/projects/';
-    var urlBaseTask = 'http://projectservice.staging.tangentmicroservices.com/api/v1/task/';
+    var urlBaseTask = 'http://projectservice.staging.tangentmicroservices.com/api/v1/tasks/';
 
     /**
      * This var are used in sharing information between controllers
@@ -176,10 +176,11 @@ angular.module('practicalAssignmentApp')
          * Get a Specific task using pk
          * param : pk of the project
          */ 
-        this.getTask = function(key) {
+        this.getTask = function() {
 
+            console.log(Pkey);
             return    $http.get(
-                 urlBaseTask + key + '/',
+                 urlBaseTask,
                  {headers: {
                     'Content-Type' : 'application/json',
                     'Authorization' : 'Token '+ Token
