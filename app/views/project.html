@@ -4,12 +4,16 @@
       All your Projects 
     </h1>
 
-      
+      <div class="alert alert-success fade in">
+         <strong>{{message}}</strong> {{message_info}} 
+      </div>
+
         <div class=" panel-group" id="accordion1">
           <div class="panel panel-default">
             <div class="panel-heading">
               <h4 class="panel-title">
-                <a href="javascript:;" ng-click="cleanVar()" data-toggle="collapse" data-parent="#accordion1" data-target="#collapseOne">
+                <a href="javascript:;" ng-click="cleanVar()" data-toggle="collapse" 
+                data-parent="#accordion1" data-target="#collapseOne">
                   Add Project 
                 </a>
               </h4>
@@ -63,14 +67,16 @@
             </div>
             <div class=" panel-group" id="accordion">
           <div class="panel panel-default">
-            <div class="panel-heading">
-              <h4 class="panel-title">
-                <a href="javascript:;" data-toggle="collapse" data-parent="#accordion" data-target="#collapseTwo">
+            <div class="panel-heading ">
+              <h4 class="panel-title  ">
+                <a href="javascript:;"  data-toggle="collapse" data-parent="#accordion" 
+                data-target="#collapseTwo">
                   Edit Project 
                 </a>
               </h4>
 
-             <div id="collapseTwo" ng-disabled="disable_editProject" ng-submit="editProject()" class="panel-collapse collapse out">
+             <div id="collapseTwo" ng-disabled="disable_editProject" 
+                    ng-submit="editProject()" class="panel-collapse collapse out">
               <div class="panel-body">
                   <form>
                       <div class="form-group">
@@ -119,8 +125,11 @@
         </div>
    </div>
    <div>
-     <button class="btn btn-success itemDetails_right" ng-click="deleteProject()" >Delete Project</button>
-       <button class="btn btn-success itemDetails_right" ng-click="viewDetails()" type="submit">View Project</button>
+     <button class="btn btn-danger itemDetails_right"
+          ng-disabled="disable_delProject" ng-class="{'diabled-class': disable_delProject}"  ng-click="deleteProject()" >Delete Project</button>
+       <button class="btn btn-success itemDetails_right"
+              ng-disabled="disable_delProject"
+        ng-class="{'diabled-class': disable_delProject}" ng-click="viewDetails()">View Project</button>
    </div>
     <table class="table table-sm table-bordered">
       <thead>
@@ -136,7 +145,7 @@
         </tr>
       </thead>
       <tbody>
-          <tr ng-click="clickedOnItem($index)" ng-repeat="item in projects">
+          <tr ng-class="{'selected':$index == selectedRow}" ng-click="clickedOnItem($index)" ng-repeat="item in projects">
               <th scope="row">{{$index}}</th>
               <td>{{item.title}}</td>
               <td>{{item.description}}</td>

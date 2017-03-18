@@ -5,6 +5,8 @@ angular.module('practicalAssignmentApp')
 
 
          $scope.projects = [];
+         $scope.message;
+         $scope.message_info;
          $scope.title;
          $scope.description;
          $scope.end_title;
@@ -17,6 +19,12 @@ angular.module('practicalAssignmentApp')
          $scope.disable_ViewProject = true;
          $scope.index;
 
+
+          $scope.selectedRow = null;  // initialize our variable to null
+            $scope.setClickedRow = function(index){  //function that sets the value of selectedRow to current index
+                $scope.selectedRow = index;
+            }
+
         /**
          * Getting all the users projects
          */
@@ -25,7 +33,13 @@ angular.module('practicalAssignmentApp')
         userService.getProjects()
                 .then(function(response) {
                     $scope.projects = response.data;
+                    $scope.message = 'Successs';
+                    $scope.message_info = 'Your Projects are  loaded!';
+                    $scope.message_disable = false;
                 }, function(error){
+                    $scope.message = 'Error';
+                    $scope.message_info = 'Your Projects couldnt be loaded!';
+                    $scope.message_disable = false;
                     console.log('Error Trying to retrieve the information');
                 });    
 
@@ -57,8 +71,14 @@ angular.module('practicalAssignmentApp')
 
                 }
             ).then(function(response){
-                console.log(response);
+                $scope.message = 'Successs';
+                    $scope.message_info = 'Your Projects has been added!';
+                    $scope.message_disable = false;
+                getProjects();
             }, function(error){
+                    $scope.message = 'Error';
+                    $scope.message_info = 'Problem occured while trying to addProject!';
+                    $scope.message_disable = false;
                 console.log("Error Adding new Project");
             });
         }; // EOF
@@ -71,9 +91,13 @@ angular.module('practicalAssignmentApp')
         $scope.deleteProject = function() {
 
             userService.deleteProject($scope.projects[$scope.index].pk).then(function(response){
-                console.log("In delete");
-                console.log(response);
+                getProjects();
+                $scope.message = 'Successs';
+                    $scope.message_info = 'Your Projects has been Deleted!';
+                    $scope.message_disable = false;
             }, function(error){
+                 $scope.message = 'Error';
+                 $scope.message_info = 'Problem occured while trying to DelProject!';
                 console.log("Error deleting  Project");
             });
         }; // EOF
@@ -88,6 +112,8 @@ angular.module('practicalAssignmentApp')
             $scope.disable_ViewProject = false;
             $scope.disable_delProject = false;
 
+            
+            $scope.selectedRow = $index;
             $scope.projects[$index];
             $scope.index = $index
             $scope.title = $scope.projects[$index].title;
@@ -133,8 +159,14 @@ angular.module('practicalAssignmentApp')
 
                 },$scope.projects[$scope.index].pk
             ).then(function(response){
-                console.log(response);
+                 $scope.message = 'Successs';
+                    $scope.message_info = 'Your Projects has been Edited !';
+                    $scope.message_disable = false;
+                getProjects();
             }, function(error){
+                 $scope.message = 'Error';
+                 $scope.message_info = 'Problem occured while trying to Edit Project!';
+                 $scope.message_disable = false;
                 console.log("Error Editing  Project");
             });
         }; // EOF

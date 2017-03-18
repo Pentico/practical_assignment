@@ -94,7 +94,7 @@ margin: 0px;
 
 
 
-body{
+/*body{
     padding-top: 120px;
     padding-bottom: 40px;
     background-color: #eee;
@@ -173,4 +173,21 @@ body{
     color: #fff;
     text-align: center;
     text-shadow: 0 2px 2px rgba(0,0,0,0.5);
-  }
+  }*/
+
+
+
+  /**
+    Today Work
+  */
+  .selected {
+    background-color:black;
+    color:blue;
+    font-weight:bold;
+}
+
+.disabled-class{
+  background-color: black;
+  color: gray;
+  font-weight: bold;
+}

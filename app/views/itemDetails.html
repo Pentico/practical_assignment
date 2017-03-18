@@ -4,6 +4,9 @@
   <div class="col-sm-12 itemDetails itemDetails_left Board">
        <h2>Bordered Table</h2>
 
+        <div class="alert alert-success fade in">
+          <strong>{{message}}</strong> {{message_info}} 
+        </div>
 
         <div class=" panel-group" id="accordion">
           <div class="panel panel-default">
@@ -103,7 +106,8 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-click="clickedOnItem($index)" ng-repeat="item in tasks">
+                <tr ng-class="{'selected':$index == selectedRow}" ng-click="clickedOnItem($index)" ng-repeat="item in tasks">
+                    <th scope="row">{{$index}}</th>
                     <td>{{item.title}}</td>
                     <td>{{item.due_date}}</td>
                     <td>{{item.estimated_hours}}</td>
