@@ -90,6 +90,7 @@ margin: 0px;
 .login {
   position: relative;
   left: 25%;
+  right: 25%;
 }
 
 
@@ -181,7 +182,7 @@ margin: 0px;
     Today Work
   */
   .selected {
-    background-color:black;
+    background-color:silver;
     color:blue;
     font-weight:bold;
 }
