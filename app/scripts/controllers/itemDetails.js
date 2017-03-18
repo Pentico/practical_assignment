@@ -48,11 +48,41 @@ angular.module('practicalAssignmentApp')
         $scope.clickedOnItem = function($index) {
 
             $scope.index = $index;
+
+            $scope.title = $scope.tasks[$index].title;
+            $scope.due_date = $scope.tasks[$index].due_date;
+            $scope.estimated_hours = $scope.tasks[$index].estimated_hours;
         }
 
         $scope.addTask = function(){
-            
+
+            console.log($scope.estimated_hours);
+            console.log($scope.due_date);
+            userService.addTask({
+                due_date : $scope.due_date,
+                estimated_hours : $scope.estimated_hours,
+                title   : $scope.title,
+                project : userService.getPkey()
+            }).then(function(response) {
+                console.log(response);
+            }, function(error){
+                console.log("Error Adding Task");
+            });
         }
+
+         // EOF
+
+          /**
+         * Clearing the variable so the initial 
+         * values are not displayed when you want to add a new project.
+         */
+        $scope.cleanVar = function() {
+
+            $scope.title = null;
+            $scope.estimated_hours = null;
+            $scope.due_date = null;
+
+        }; // EOF
 
     }]);
     

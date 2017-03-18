@@ -1,67 +1,11 @@
 
 
 <div class="row">
-  <div class="col-sm-6 itemDetails itemDetails_left Board">
+  <div class="col-sm-12 itemDetails itemDetails_left Board">
        <h2>Bordered Table</h2>
 
 
-        <div class=" panel-group" id="accordion1">
-          <div class="panel panel-default">
-            <div class="panel-heading">
-              <h4 class="panel-title">
-                <a href="javascript:;" ng-click="cleanVar()" data-toggle="collapse" data-parent="#accordion1" data-target="#collapseOne">
-                  Add Project 
-                </a>
-              </h4>
-              </div>
-          </div>
-            </div>
-            <div id="collapseOne" ng-submit="addProject()" class="panel-collapse collapse out">
-              <div class="panel-body">
-                  <form>
-                      <div class="form-group">
-                        <label for="title">Project Title :</label>
-                        <input type="text" class="form-control" 
-                                id="title"
-                                ng-model="title"
-                                required
-                                >
-                      </div>
-                      <div class="form-group">
-                        <label for="description">Description :</label>
-                        <input type="text" class="form-control" 
-                                id="description"
-                                ng-model="description"
-                                required
-                                >
-                      </div>
-                      <div class="form-group">
-                        <label for="start_date">Start Date :</label>
-                        <input type="date" class="form-control" 
-                              id="start_date"
-                              ng-model="start_date"
-                              required
-                              >
-                      </div>
-                      <div class="form-group">
-                        <label for="end_date">End Date :</label>
-                        <input type="date" class="form-control" 
-                        id="end_date"
-                        ng-model="end_date"
-                        >
-                      </div>
-
-                      <div class="checkbox">
-                        <label><input type="checkbox" ng-model="is_billable"> Is Billable</label>
-                      </div>
-                       <div class="checkbox">
-                        <label><input type="checkbox" ng-model="is_active"> Is Active</label>
-                      </div>
-                       <button class="btn btn-success itemDetails_right" type="submit">Submit</button>
-                </form>
-              </div>
-            </div>
-            <div class=" panel-group" id="accordion">
+        <div class=" panel-group" id="accordion">
           <div class="panel panel-default">
             <div class="panel-heading">
               <h4 class="panel-title">
@@ -82,18 +26,17 @@
                                 >
                       </div>
                       <div class="form-group">
-                        <label for="date"> Due Date :</label>
-                        <input type="text" class="form-control" 
-                                id="description"
-                                ng-model="description"
-                                required
+                        <label for="due_date"> Due Date :</label>
+                        <input type="date" class="form-control" 
+                                id="due_date"
+                                ng-model="due_date"
                                 >
                                 </div>
                       <div class="form-group">
-                        <label for="est_hr"> Estimated Hours :</label>
-                        <input type="time" class="form-control" 
-                                id="est_hr"
-                                ng-model="est_hr"
+                        <label for="estimated_hours"> Estimated Hours :</label>
+                        <input type="number" class="form-control" 
+                                id="estimated_hours"
+                                ng-model="estimated_hours"
                                 >
                       </div>
                      
@@ -102,6 +45,50 @@
               </div>
             </div>
           </div>
+          </div>
+        </div>
+        <div class=" panel-group" id="accordion1">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <a href="javascript:;" ng-click="cleanVar()" data-toggle="collapse" data-parent="#accordion1" data-target="#collapseOne">
+                    Edit Task 
+                </a>
+              </h4>
+              </div>
+          </div>
+            </div>
+            <div id="collapseOne" ng-submit="editProject()" class="panel-collapse collapse out">
+              <div class="panel-body">
+                 <form>
+                      <div class="form-group">
+                        <label for="title">Title :</label>
+                        <input type="text" class="form-control" 
+                                id="title"
+                                ng-model="title"
+                                required
+                                >
+                      </div>
+                      <div class="form-group">
+                        <label for="date"> Due Date :</label>
+                        <input type="date" class="form-control" 
+                                id="due_date"
+                                ng-model="due_date"
+                                >
+                                </div>
+                      <div class="form-group">
+                        <label for="estimated_hours"> Estimated Hours :</label>
+                        <input type="number" class="form-control" 
+                                id="estimated_hours"
+                                ng-model="estimated_hours"
+                                >
+                      </div>
+                     
+                       <button class="btn btn-success itemDetails_right" type="submit">Submit</button>
+                </form>
+              </div>
+            </div>
+           
         </div>
        
        <p>The .table-bordered class adds borders to a table:</p>
@@ -124,36 +111,5 @@
             </table>
          </div>
     </div>
-  <div class="col-sm-5  Board itemDetails itemDetails_right">
-      <h2>Bordered Table</h2>
-        <p>The .table-bordered class adds borders to a table:</p>   
-         <div class="table-responsive">             
-            <table class="table table-bordered">
-                <thead>
-                <tr>
-                    <th>Firstname</th>
-                    <th>Lastname</th>
-                    <th>Email</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>John</td>
-                    <td>Doe</td>
-                    <td>john@example.com</td>
-                </tr>
-                <tr>
-                    <td>Mary</td>
-                    <td>Moe</td>
-                    <td>mary@example.com</td>
-                </tr>
-                <tr>
-                    <td>July</td>
-                    <td>Dooley</td>
-                    <td>july@example.com</td>
-                </tr>
-                </tbody>
-            </table>
-         </div>
-     </div>
+  </div>
 </div>

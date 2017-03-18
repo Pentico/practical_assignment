@@ -208,18 +208,23 @@ angular.module('practicalAssignmentApp')
          * Adds a task to project
          * param : task of the project
          */
-        this.putTask = function(task, pKey) {
+        this.addTask = function(task) {
 
-            if(project.due_date == null){
-                delete project.due_date;
+            if(task.due_date == null){
+                delete task.due_date;
             }else{
 
-               var temp = project.due_date;
-                project.due_date = temp.getFullYear() + '-' + (temp.getMonth()+1) + '-' + temp.getDate();
+               var temp = task.due_date;
+                task.due_date = temp.getFullYear() + '-' + (temp.getMonth()+1) + '-' + temp.getDate();
             }
+
+            if(task.estimated_hours == null){
+                delete task.estimated_hours;
+            }
+            console.log(task.due_date);
            return $http({
-                        method: 'PUT',
-                        url: urlBaseTask + pKey + '/',
+                        method: 'POST',
+                        url: urlBaseTask,
                         headers: {
                             'Content-Type': 'application/x-www-form-urlencoded',
                             'Authorization' : 'Token '+ Token
@@ -230,7 +235,7 @@ angular.module('practicalAssignmentApp')
                             str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
                             return str.join("&");
                         },
-                        data: project
+                        data: task
                 })
         }; // EOF
 
