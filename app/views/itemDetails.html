@@ -51,14 +51,14 @@
           <div class="panel panel-default">
             <div class="panel-heading">
               <h4 class="panel-title">
-                <a href="javascript:;" ng-click="cleanVar()" data-toggle="collapse" data-parent="#accordion1" data-target="#collapseOne">
+                <a href="javascript:;"  data-toggle="collapse" data-parent="#accordion1" data-target="#collapseOne">
                     Edit Task 
                 </a>
               </h4>
               </div>
           </div>
             </div>
-            <div id="collapseOne" ng-submit="editProject()" class="panel-collapse collapse out">
+            <div id="collapseOne" ng-submit="editTask()" class="panel-collapse collapse out">
               <div class="panel-body">
                  <form>
                       <div class="form-group">
@@ -102,7 +102,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-click="clickedOnItem($index)" ng-repeat="item in project">
+                <tr ng-click="clickedOnItem($index)" ng-repeat="item in tasks">
                     <td>{{item.title}}</td>
                     <td>{{item.due_date}}</td>
                     <td>{{item.estimated_hours}}</td>

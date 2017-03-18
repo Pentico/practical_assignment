@@ -3,12 +3,11 @@
 angular.module('practicalAssignmentApp')
     .controller('itemDetailsController',['$scope', 'userService', function($scope, userService, $location ){
 
-        $scope.tasks = '';
         $scope.index ='';
         $scope.title;
         $scope.estimated_hours;
         $scope.due_date;
-        $scope.project= [];
+        $scope.tasks= [];
 
 
         /***
@@ -20,10 +19,7 @@ angular.module('practicalAssignmentApp')
          */
         userService.getTask()
             .then(function(response){
-                console.log("in GetTAsks");
-                console.log(response);
-                 $scope.project =response.data;
-                console.log($scope.project[0].title);
+                 $scope.tasks =response.data;
                
             }, function(error){
                 console.log('On Error');
@@ -50,10 +46,14 @@ angular.module('practicalAssignmentApp')
             $scope.index = $index;
 
             $scope.title = $scope.tasks[$index].title;
-            $scope.due_date = $scope.tasks[$index].due_date;
-            $scope.estimated_hours = $scope.tasks[$index].estimated_hours;
+            $scope.due_date =new Date($scope.tasks[$index].due_date);
+            $scope.estimated_hours = parseInt($scope.tasks[$index].estimated_hour);
         }
 
+
+        /***
+         * Adding a new Task
+         */ 
         $scope.addTask = function(){
 
             console.log($scope.estimated_hours);
@@ -84,5 +84,20 @@ angular.module('practicalAssignmentApp')
 
         }; // EOF
 
+        /**
+         * Edit a Task
+         */ 
+        $scope.editTask = function() {
+            userService.editTask({
+                title           : $scope.title,
+                estimated_hours : $scope.estimated_hours,
+                due_date        : $scope.due_date,
+                project : userService.getPkey()
+            },$scope.tasks[$scope.index].id).then(function(response){
+                console.log(response);
+            }, function(error){
+                console.log("Error in editTask");
+            })
+        }
     }]);
     

@@ -245,16 +245,16 @@ angular.module('practicalAssignmentApp')
          */
         this.editTask = function(task, pKey){
 
-              if(project.due_date == null){
-                delete project.due_date;
+              if(task.due_date == null){
+                delete task.due_date;
             }else{
 
-               var temp = project.due_date;
-                project.due_date = temp.getFullYear() + '-' + (temp.getMonth()+1) + '-' + temp.getDate();
+               var temp = task.due_date;
+                task.due_date = temp.getFullYear() + '-' + (temp.getMonth()+1) + '-' + temp.getDate();
             }
 
             return  $http({
-                        method: 'Patch',
+                        method: 'PUT',
                         url: urlBaseTask + pKey + '/',
                         headers: {
                             'Content-Type': 'application/x-www-form-urlencoded',
@@ -266,7 +266,7 @@ angular.module('practicalAssignmentApp')
                             str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
                             return str.join("&");
                         },
-                        data: project
+                        data: task
                 })
         }; // EOF
 
