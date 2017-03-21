@@ -7,3 +7,4 @@ version 0.16.0.
 
 Run `grunt` for building and `grunt serve` for preview.
 
+## Closed  on 21 MAR 17
